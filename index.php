@@ -1,6 +1,6 @@
 
 <?php 
-    $conn = mysqli_connect("localhost","root","","db_klaim");
+    $conn = mysqli_connect("localhost","root","root","db_klaim");
 
 
  ?>

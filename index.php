@@ -1,47 +1,61 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-require 'vendor/autoload.php';
+require_once 'config.php';
+?>
 
-// use PhpOffice\PhpSpreadsheet\Spreadsheet;
-// use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Reader\Xls;
-// use PhpOffice\PhpSpreadsheet\Reader\IReadFilter
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-// $spreadsheet = new Spreadsheet();
-// $sheet = $spreadsheet->getActiveSheet();
-// $sheet->setCellValue('A1', 'Hello World !');
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tire Claim Sistem</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
-// $writer = new Xlsx($spreadsheet);
-// $writer->save('hello world.xlsx');
-$inputFileName = './tyres.xls';
-// $helper->log('Loading file ' . pathinfo($inputFileName, PATHINFO_BASENAME) . ' using IOFactory to identify the format');
-// $spreadsheet = IOFactory::load($inputFileName);
-// $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-// $sheetData = $spreadsheet->getActiveSheet()->toArray();
-// $reader = new Xls();
-// $spreadsheet = $reader->load($inputFileName);
-$reader = new Xls();
-$spreadsheet = $reader->load($inputFileName);
+    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <script src="assets/js/jquery-3.4.1.min.js"></script>
+</head>
 
-$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-$data = []; 
-$no = 0;
-$keys = ['no','ukuran_ban','pattern','li','si','tipe','merk','no_serial1','no_serial2','new','cl','kerusakan','keterangan'];
-foreach ($sheetData as $key => $row) {
-    if($no >= 9){
-        $temp = array_values(array_slice($row,0,14));
-        unset($temp[12]);
-        $arr = array_values($temp);
-        $newTemp = [];
-        $idx = 0;
-        foreach ($arr as $key => $value) {
-            $newTemp[$keys[$idx]] = $value;
-            $idx++;
-        }
-        $data[] = $newTemp;
+<body>
+    <?php
+    if (isset($_SESSION['username'])) {
+        require_once 'dashboard.php';
+    } else {
+        require_once 'login.php';
     }
-    $no++;
-}
-var_dump($data);    
+    ?>
+
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <!-- <script src="assets/js/jquery-1.10.2.js"></script> -->
+    
+
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+
+    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script src="assets/js/morris/morris.js"></script>
+    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="assets/js/function.js"></script>
+    <!-- <script src="assets/js/custom.js"></script> -->
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-example').dataTable();
+        });
+    </script>
+    <!-- CUSTOM SCRIPTS -->
+
+
+</body>
+
+</html>

@@ -6,8 +6,8 @@ $tgl_klaim = '';
 $id_distributor = '';
 $type = $_GET['aksi'];
 $grup = 'PCR';
-if ($type == 'edit') {
-    $sql = "select * from db_klaim where id_klaim = '" . $_GET['id_klaim'] . "' ";
+if ($type == 'edit_detail') {
+    $sql = "select * from db_klaim_detail where id_klaim = '" . $_GET['id_klaim'] . "' ";
     $query = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($query);
     $no_klaim = $row['no_klaim'];
@@ -16,12 +16,14 @@ if ($type == 'edit') {
     $grup = $row['grup'];
 }
 
-$dist = [];
-$sql = "select * from db_distributor";
+$ban = [];
+$sql = "select * from db_ban";
 $query = mysqli_query($conn, $sql);
 while ($row = mysqli_fetch_assoc($query)) {
-    $dist[] = $row;
+    $ban[] = $row;
 }
+
+
 
 ?>
 <div class="panel panel-default">
@@ -33,29 +35,25 @@ while ($row = mysqli_fetch_assoc($query)) {
             <div class="col-md-12" style="margin-bottom: 15px">
                 <form role="form" method="POST">
                     <div class="form-group">
-                        <label>No Klaim</label>
-                        <input class="form-control" name="no_klaim" value="<?= $no_klaim ?>" readonly />
-                    </div>
-                    <div class="form-group">
-                        <label>Tgl Klaim</label>
-                        <input class="form-control" id="tgl_klaim" name="tgl_klaim" value="<?= $tgl_klaim ?>" readonly />
-                    </div>
+                        <label>Sisa Alur</label>
+                        <input class="form-control" id="sisa_alur" name="sisa_alur" value="<?= $sisa_alur ?>" />
+                    </div>                    
                     <div class="form-group">
                         <label>Distributor</label>
                         <select name="id_distributor" class="form-control">
-                            <option value="">Pilih Distributor</option>
-                            <?php foreach ($dist as $key => $d) : ?>
-                                <option <?= $id_distributor == $d['id_distributor'] ? 'selected' : ''; ?> value="<?= $d['id_distributor'] ?>"><?= $d['nama_distributor'] ?></option>
+                            <option value="">Pilih Ban</option>
+                            <?php foreach ($ban as $key => $d) : ?>
+                                <option <?= $id == $d['id'] ? 'selected' : ''; ?> value="<?= $d['id'] ?>"><?= $d['ukuran'] ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <label>Grup</label>
-                        <select class="form-control" name="grup">
-                            <option <?= $grup == 'PCR' ? 'selected' : ''; ?> value="PCR">PCR</option>
-                            <option <?= $grup == 'MC' ? 'selected' : ''; ?> value="MC">MC</option>
-                        </select>
+                        <label>Kerusakan</label>
+                        <textarea class="form-control" rows="5" id="kerusakan"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea class="form-control" rows="5" id="keterangan"></textarea>
                     </div>
                     <div>
                         <input type="submit" name="simpan" value="simpan" class="btn btn-primary" style="margin-top: 25px" style="">

@@ -84,8 +84,14 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
                             include 'page/proses/proses.php';
                         }elseif ($aksi == "tambah") {
                             include 'page/proses/tambah.php';
+                        }elseif ($aksi == "edit") {
+                            include 'page/proses/tambah.php';
                         }elseif ($aksi == "import") {
                             include 'page/proses/import.php';
+                        }elseif ($aksi == "detail") {
+                            include 'page/proses/detail.php';
+                        }elseif ($aksi == "edit_detail") {
+                            include 'page/proses/edit_detail.php';
                         }
                     } else if ($page == "ban") {
                         if ($aksi == "") {

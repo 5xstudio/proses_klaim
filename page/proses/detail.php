@@ -44,8 +44,8 @@ while ($row = mysqli_fetch_assoc($query)) {
                         <td><?=$v['kerusakan']?></td>
                         <td><?=$v['keterangan']?></td>
                         <td>
-                            <a href="?page=klaim&aksi=edit_detail&id_klaim=<?=$_GET['id_klaim']?>&id_klaim_detail<?=$v['id_klaim_detail']?>" class="btn btn-sm btn-success">Edit</a>
-                            <a class="btn btn-sm btn-danger">Hapus</a>
+                            <a href="?page=klaim&aksi=edit_detail&id_klaim=<?=$_GET['id_klaim']?>&id_klaim_detail=<?=$v['id_klaim_detail']?>" class="btn btn-sm btn-success">Edit</a>
+                            <a href="?page=klaim&aksi=hapus_detail&id_klaim_detail=<?=$v['id_klaim_detail']?>" class="btn btn-sm btn-danger">Hapus</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

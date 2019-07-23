@@ -20,9 +20,9 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
             <ul class="nav" id="main-menu">
                 <li class="text-center">
                     <img src="assets/img/find_user.png" class="user-image img-responsive" />
-                    <span style="color:white;font-weight;bold;font-size:1.5em;"><?=ucwords($_SESSION['nama'])?></span>
+                    <span style="color:white;font-weight;bold;font-size:1.5em;"><?= ucwords($_SESSION['nama']) ?></span>
                     <br>
-                    <span style="color:white;font-weight;bold;font-size:1em;"><?=$_SESSION['akses']?></span>
+                    <span style="color:white;font-weight;bold;font-size:1em;"><?= $_SESSION['akses'] ?></span>
                 </li>
 
 
@@ -55,9 +55,9 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
                         <li>
                             <a href="?page=toko"><i class="fa fa-edit fa-1x"></i>Data Toko</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="?page=karyawan"><i class="fa fa-edit fa-1x"></i>Data Karyawan</a>
-                        </li>
+                        </li> -->
                 </li>
             </ul>
 
@@ -74,7 +74,7 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
                 <div class="col-md-12">
 
                     <?php
-                    
+
                     if ($page == "pengaturan") {
                         if ($aksi == "") {
                             include 'page/pengaturan/pengaturan.php';
@@ -82,17 +82,17 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
                     } else if ($page == "klaim") {
                         if ($aksi == "") {
                             include 'page/proses/proses.php';
-                        }elseif ($aksi == "tambah") {
+                        } elseif ($aksi == "tambah") {
                             include 'page/proses/tambah.php';
-                        }elseif ($aksi == "edit") {
+                        } elseif ($aksi == "edit") {
                             include 'page/proses/tambah.php';
-                        }elseif ($aksi == "import") {
+                        } elseif ($aksi == "import") {
                             include 'page/proses/import.php';
-                        }elseif ($aksi == "detail") {
+                        } elseif ($aksi == "detail") {
                             include 'page/proses/detail.php';
-                        }elseif ($aksi == "edit_detail") {
+                        } elseif ($aksi == "edit_detail") {
                             include 'page/proses/edit_detail.php';
-                        }elseif ($aksi == 'hapus_detail') {
+                        } elseif ($aksi == 'hapus_detail') {
                             include 'page/proses/action.php';
                         }
                     } else if ($page == "ban") {
@@ -139,7 +139,7 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
                         if ($aksi == "") {
                             include 'page/master/karyawan/karyawan.php';
                         }
-                    }else{
+                    } else {
                         include 'page/monitoring/monitoring.php';
                     }
 

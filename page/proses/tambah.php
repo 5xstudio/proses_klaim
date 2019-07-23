@@ -4,6 +4,7 @@
 $no_klaim = '';
 $tgl_klaim = '';
 $id_distributor = '';
+$keterangan = '';
 $type = $_GET['aksi'];
 $grup = 'PCR';
 if ($type == 'edit') {
@@ -14,6 +15,7 @@ if ($type == 'edit') {
     $tgl_klaim = $row['tgl_klaim'];
     $id_distributor = $row['id_distributor'];
     $grup = $row['grup'];
+    $keterangan = $row['keterangan'];
 }
 
 $dist = [];
@@ -57,6 +59,10 @@ while ($row = mysqli_fetch_assoc($query)) {
                             <option <?= $grup == 'MC' ? 'selected' : ''; ?> value="MC">MC</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea class="form-control" rows="5" name="keterangan"><?=$keterangan?></textarea>
+                    </div>
                     <div>
                         <input type="submit" name="simpan" value="simpan" class="btn btn-primary" style="margin-top: 25px" style="">
                         <a href="?page=klaim" class="btn btn-primary pull-right" style="margin-top: 25px" style="">Kembali</a>
@@ -88,6 +94,7 @@ if (isset($_POST['simpan'])) {
     $grup = $_POST['grup'];
     $id_distributor = $_POST['id_distributor'];
     $tgl_klaim = $_POST['tgl_klaim'];
+    $keterangan = $_POST['keterangan'];
     $simpan = $_POST['simpan'];
 
     if ($no_klaim == '') {
@@ -97,11 +104,11 @@ if (isset($_POST['simpan'])) {
 
     if ($_GET['aksi'] == 'tambah') {
         // tambah
-        $sql = "INSERT into db_klaim (no_klaim, grup, id_distributor, tgl_klaim) values('$no_klaim', '$grup', '$id_distributor', '$tgl_klaim')";
+        $sql = "INSERT into db_klaim (no_klaim, grup, id_distributor, tgl_klaim, keterangan) values('$no_klaim', '$grup', '$id_distributor', '$tgl_klaim', '$keterangan')";
         $result = $conn->query($sql);
     } else {
         // edit
-        $sql = "UPDATE db_klaim set grup='$grup', id_distributor='$id_distributor' where id_klaim='" . $_GET['id_klaim'] . "' ";
+        $sql = "UPDATE db_klaim set grup='$grup', id_distributor='$id_distributor', keterangan='$keterangan' where id_klaim='" . $_GET['id_klaim'] . "' ";
         $result = $conn->query($sql);
     }
 

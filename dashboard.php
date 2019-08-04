@@ -62,7 +62,16 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
             </ul>
 
             <li>
-                <a href="?page=pengaturan"><i class="fa fa-laptop fa-3x"></i> Pengaturan </a>
+                <a href="#"><i class="fa fa-laptop fa-3x"></i> Pengaturan </a>
+                <ul class="nav nav-second-level">
+
+                    <li>
+                        <a href="?page=user"><i class="fa fa-edit fa-1x"></i>User</a>
+                    </li>
+                    <li>
+                        <a href="?page=summary"><i class="fa fa-edit fa-1x"></i>Summary</a>
+                    </li>
+                </ul>
             </li>
             </ul>
         </div>
@@ -136,6 +145,16 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
                             include 'page/master/toko/hapus_toko.php';
                         }
                     } else if ($page == "karyawan") {
+                        if ($aksi == "") {
+                            include 'page/master/karyawan/karyawan.php';
+                        }
+                    } else if ($page == "user") {
+                        if ($aksi == "") {
+                            include 'page/setting/user/user.php';
+                        } elseif ($aksi == "edit") {
+                            include 'page/setting/user/edit.php';
+                        }
+                    } else if ($page == "pengaturan") {
                         if ($aksi == "") {
                             include 'page/master/karyawan/karyawan.php';
                         }

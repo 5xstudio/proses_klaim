@@ -20,6 +20,11 @@ while ($row = mysqli_fetch_assoc($query)) {
     </div>
     <div class="panel-body">
         <div class="table-responsive">
+            <div class="col-md-12">
+                <button onclick="exportExcel()" class="btn btn-success pull-right" style="margin-bottom: 15px"><i class="fa fa-file-excel-o"></i> Export</button><br>
+
+            </div>
+            <br>
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr>
@@ -53,7 +58,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                             <td class=""><?= $v['ukuran'] ?></td>
                             <td class=""><?= $v['brand'] ?></td>
                             <td class=""><?= $v['pattern'] ?></td>
-                            <td class=""><?= $v['li'] ?></td>
+                            <td class=""><?= $v['li'] .' - '. $v['si'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -61,3 +66,8 @@ while ($row = mysqli_fetch_assoc($query)) {
         </div>
     </div>
 </div>
+<script>
+    function exportExcel(){
+        window.open('function.php?type=export_summary')
+    }
+</script>

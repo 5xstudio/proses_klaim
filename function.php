@@ -70,11 +70,11 @@ function delete()
     $status = 1;
     $msg = "Hapus data berhasil!";
     $post = $_POST;
-    $sql = "DELETE FROM ".$post['table']." where ".$post['key']." = '".$post['value']."' ";
+    $sql = "DELETE FROM " . $post['table'] . " where " . $post['key'] . " = '" . $post['value'] . "' ";
     $q = mysqli_query($conn, $sql);
     $result = mysqli_num_rows($q);
-    if($post['table'] == 'db_klaim'){
-        $sql = "DELETE FROM ".$post['table']."_detail where ".$post['key']." = '".$post['value']."' ";
+    if ($post['table'] == 'db_klaim') {
+        $sql = "DELETE FROM " . $post['table'] . "_detail where " . $post['key'] . " = '" . $post['value'] . "' ";
         $q = mysqli_query($conn, $sql);
     }
     echo json_encode(['status' => $status, 'message' => $msg]);
@@ -92,7 +92,7 @@ function processDone()
     if ($result > 0) {
         $msg = "Klaim belum diproses semua!";
     } else {
-        $sqlup = "UPDATE db_klaim set status = 'Done' where id_klaim='" . $post['id_klaim'] . "'";
+        $sqlup = "UPDATE db_klaim set status = 'Done',tgl_selesai = CURRENT_TIMESTAMP() where id_klaim='" . $post['id_klaim'] . "'";
         $qr = mysqli_query($conn, $sqlup);
         $status = 1;
     }

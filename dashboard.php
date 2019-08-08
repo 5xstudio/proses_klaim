@@ -151,12 +151,12 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
                     } else if ($page == "user") {
                         if ($aksi == "") {
                             include 'page/setting/user/user.php';
-                        } elseif ($aksi == "edit") {
+                        } elseif ($aksi == "edit" || $aksi == "tambah") {
                             include 'page/setting/user/edit.php';
                         }
-                    } else if ($page == "pengaturan") {
+                    } else if ($page == "summary") {
                         if ($aksi == "") {
-                            include 'page/master/karyawan/karyawan.php';
+                            include 'page/pengaturan/summary.php';
                         }
                     } else {
                         include 'page/monitoring/monitoring.php';

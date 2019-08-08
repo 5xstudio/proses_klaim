@@ -33,6 +33,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                         <th>Ganti</th>
                         <th>Tolak</th>
                         <th>Status Klaim</th>
+                        <th>Tgl Selesai</th>
                         <th>Keterangan</th>
                     </tr>
                 </thead>
@@ -48,8 +49,11 @@ while ($row = mysqli_fetch_assoc($query)) {
                             <td class="text-right"><?= $v['total'] ?></td>
                             <td class="text-right"><?= $v['ganti'] ?></td>
                             <td class="text-right"><?= $v['tolak'] ?></td>
-                            <td class=""><span class="<?=$v['status'] == 'Done' ? 'label label-success' : ''?>"><?= $v['status'] ?></span></td>
-                            <td data-toggle="tooltip" title="<?=$v['keterangan']?>"><?=strlen($v['keterangan']) >= 30 ? substr($v['keterangan'], 0,30).'...' : $v['keterangan']?></td>
+                            <td class=""><span class="<?= $v['status'] == 'Done' ? 'label label-success' : '' ?>"><?= $v['status'] ?></span></td>
+                            <td class=""><span class="">
+                                    <?= $v['status'] == 'Done' ? date('Y-m-d', strtotime($v['tgl_selesai'])) : '' ?>
+                                </span></td>
+                            <td data-toggle="tooltip" title="<?= $v['keterangan'] ?>"><?= strlen($v['keterangan']) >= 30 ? substr($v['keterangan'], 0, 30) . '...' : $v['keterangan'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

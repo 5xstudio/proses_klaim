@@ -6,7 +6,7 @@ $result = mysqli_query($conn, "SELECT * FROM db_user"); {
 ?>
 </div>
 <div class="panel-body">
-    <a href="?page=ban&aksi=tambah" class="btn btn-primary" style="margin-bottom: 15px"><i class="fa fa-plus"></i>Tambah Data</a>
+    <a href="?page=user&aksi=tambah" class="btn btn-primary" style="margin-bottom: 15px"><i class="fa fa-plus"></i>Tambah Data</a>
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
             <thead>

@@ -18,9 +18,7 @@ while ($row = mysqli_fetch_assoc($query)) {
 ?>
 </div>
 <div class="panel-body">
-    <a href="?page=klaim&aksi=tambah" class="btn btn-primary" style="margin-bottom: 15px"><i class="fa fa-plus"></i>Tambah Data</a>
-    <a href="?page=klaim&aksi=import" class="btn btn-primary pull-right" style="margin-bottom: 15px"><i class="fa fa-file-excel-o"></i> Import Excel</a>
-    <a href="tcs.xls" class="btn btn-success pull-right" style="margin-bottom: 15px;margin-right:1rem;"><i class="fa fa-download"></i> Download Template</a>
+    <a href="?page=klaim&aksi=tambah" class="btn btn-primary" style="margin-bottom: 15px"><i class="fa fa-plus"></i>Tambah Data</a>    
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
             <thead>
@@ -31,6 +29,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                     <th>Tipe</th>
                     <th>Total Klaim</th>
                     <th>Status</th>
+                    <th>Tgl Klaim</th>
                     <th>Keterangan</th>
                     <th>Opsi</th>
                 </tr>
@@ -44,7 +43,8 @@ while ($row = mysqli_fetch_assoc($query)) {
                         <td><?= $v['nama_distributor'] ?></td>
                         <td><?= $v['grup'] ?></td>
                         <td class="text-right"><?= $v['total'] ?></td>
-                        <td><span class="<?=$v['status'] == 'Done' ? 'label label-success' : ''?>"><?= $v['status'] ?></span></td>
+                        <td><span class="<?= $v['status'] == 'Done' ? 'label label-success' : '' ?>"><?= $v['status'] ?></span></td>
+                        <td class="text-right"><?= $v['tgl_klaim'] ?></td>
                         <td data-toggle="tooltip" title="<?= $v['keterangan'] ?>"><?= strlen($v['keterangan']) >= 30 ? substr($v['keterangan'], 0, 30) . '...' : $v['keterangan'] ?></td>
                         <td>
                             <?php
@@ -56,8 +56,10 @@ while ($row = mysqli_fetch_assoc($query)) {
                                     <button onclick="doneProcess('<?= $v['id_klaim'] ?>')" class="btn btn-sm btn-warning">Done</button>
                                 <?php endif; ?>
                             <?php endif; ?>
-
-                            <a href="?page=klaim&aksi=detail&id_klaim=<?= $v['id_klaim'] ?>" class="btn btn-sm btn-info">Detail</a>
+                            <a href="?page=klaim&aksi=detail&id_klaim=<?= $v['id_klaim'] ?>&status=<?= $v['status'] ?>" class="btn btn-sm btn-info">Detail</a>
+                            <?php if ($v['status'] == 'Done') : ?>
+                                <button onclick="downloadExcel('<?= $v['id_klaim'] ?>')" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Download</button>
+                            <?php endif ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -119,6 +121,4 @@ while ($row = mysqli_fetch_assoc($query)) {
             })
         }
     }
-
-
 </script>

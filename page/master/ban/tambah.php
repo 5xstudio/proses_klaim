@@ -26,7 +26,7 @@
 
                     <div class="form-group">
                         <label>Alur Ban</label>
-                        <input class="form-control" name="alur_ban" />
+                        <input type="number" class="form-control" name="alur_ban" />
                     </div>
 
                     <div class="form-group">

@@ -16,6 +16,12 @@ if (isset($_GET['type'])) {
         case 'export_summary':
             exportSummary();
             break;
+        case 'get_data_ban':
+            getDataBan();
+            break;
+        case 'get_data_kerusakan':
+            getDataKerusakan();
+            break;
     }
 }
 
@@ -81,6 +87,25 @@ function delete()
         $q = mysqli_query($conn, $sql);
     }
     echo json_encode(['status' => $status, 'message' => $msg]);
+}
+
+
+function getDataBan()
+{
+    global $conn;
+    $sql = "SELECT * FROM db_ban where id = '{$_GET['id_ban']}'";
+    $q = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($q);
+    echo json_encode(['data' => $row]);
+}
+
+function getDataKerusakan()
+{
+    global $conn;
+    $sql = "SELECT * FROM db_kerusakan where id_kerusakan = '{$_GET['id_kerusakan']}'";
+    $q = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($q);
+    echo json_encode(['data' => $row]);
 }
 
 function processDone()
@@ -261,7 +286,7 @@ function exportSummary()
     JOIN db_klaim h ON d.id_klaim = h.id_klaim
     JOIN db_distributor dis ON h.id_distributor = dis.id_distributor
     JOIN db_ban b ON d.id_ban = b.id
-    JOIN db_toko t ON d.id_toko = t.id_toko ";
+    JOIN db_toko t ON d.id_toko = t.id_toko where h.tgl_klaim >= '{$_GET['s']}' and h.tgl_klaim <= '{$_GET['e']}' ";
     $query = mysqli_query($conn, $sql);
     $no = 1;
     while ($row = mysqli_fetch_assoc($query)) {
@@ -310,7 +335,7 @@ function exportSummary()
                     <td class=""><?= $v['ukuran'] ?></td>
                     <td class=""><?= $v['brand'] ?></td>
                     <td class=""><?= $v['pattern'] ?></td>
-                    <td class=""><?= $v['li'] .' - '. $v['si'] ?></td>
+                    <td class=""><?= $v['li'] . ' - ' . $v['si'] ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

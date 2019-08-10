@@ -21,7 +21,19 @@ while ($row = mysqli_fetch_assoc($query)) {
     <div class="panel-body">
         <div class="table-responsive">
             <div class="col-md-12">
-                <button onclick="exportExcel()" class="btn btn-success pull-right" style="margin-bottom: 15px"><i class="fa fa-file-excel-o"></i> Export</button><br>
+                <label class="col-md-1">Tgl Awal</label>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="date" class="form-control" id="start" name="start" value="<?= $alur_ban ?>" />
+                    </div>
+                </div>
+                <label class="col-md-1">Tgl Akhir</label>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="date" class="form-control" id="end" name="end" value="<?= $alur_ban ?>" />
+                    </div>
+                </div>
+                <button onclick="exportExcel()" class="btn btn-success" style="margin-bottom: 15px"><i class="fa fa-file-excel-o"></i> Export</button><br>
 
             </div>
             <br>
@@ -58,7 +70,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                             <td class=""><?= $v['ukuran'] ?></td>
                             <td class=""><?= $v['brand'] ?></td>
                             <td class=""><?= $v['pattern'] ?></td>
-                            <td class=""><?= $v['li'] .' - '. $v['si'] ?></td>
+                            <td class=""><?= $v['li'] . ' - ' . $v['si'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -67,7 +79,9 @@ while ($row = mysqli_fetch_assoc($query)) {
     </div>
 </div>
 <script>
-    function exportExcel(){
-        window.open('function.php?type=export_summary')
+    function exportExcel() {
+        var s = $("#start").val()
+        var e = $("#end").val()
+        window.open('function.php?type=export_summary&s=' + s + '&e=' + e)
     }
 </script>

@@ -99,6 +99,8 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
                             include 'page/proses/import.php';
                         } elseif ($aksi == "detail") {
                             include 'page/proses/detail.php';
+                        } elseif ($aksi == "tambah_detail") {
+                            include 'page/proses/edit_detail.php';
                         } elseif ($aksi == "edit_detail") {
                             include 'page/proses/edit_detail.php';
                         } elseif ($aksi == 'hapus_detail') {

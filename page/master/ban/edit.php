@@ -8,6 +8,8 @@ $tampil = $result->fetch_assoc();
 
 $lokasi = $tampil['brand'];
 $type = $tampil['type'];
+$li = $tampil['li'];
+$si = $tampil['si'];
 
 ?>
 
@@ -43,7 +45,7 @@ $type = $tampil['type'];
 
                     <div class="form-group">
                         <label>Alur Ban</label>
-                        <input type="number"  class="form-control" name="alur_ban" value="<?php echo $tampil['alur_ban']; ?>" />
+                        <input type="number" class="form-control" name="alur_ban" value="<?php echo $tampil['alur_ban']; ?>" />
                     </div>
 
                     <div class="form-group">
@@ -79,6 +81,14 @@ $type = $tampil['type'];
                         <label>Harga</label>
                         <input class="form-control" name="harga" value="<?php echo $tampil['harga']; ?>" />
                     </div>
+                    <div class="form-group">
+                        <label>Li</label>
+                        <input class="form-control" name="li" value="<?php echo $tampil['li']; ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label>Si</label>
+                        <input class="form-control" name="si" value="<?php echo $tampil['si']; ?>" />
+                    </div>
 
                     <div>
                         <input type="submit" name="simpan" value="Perbarui" class="btn btn-primary" style="margin-top: 25px" style="">
@@ -97,13 +107,15 @@ $grup = $_POST['grup'];
 $alur_ban = $_POST['alur_ban'];
 $pattern = $_POST['pattern'];
 $brand = $_POST['brand'];
+$li = $_POST['li'];
+$si = $_POST['si'];
 $type = $_POST['type'];
 $harga = $_POST['harga'];
 
 $simpan = $_POST['simpan'];
 
 if ($simpan) {
-    $result = $conn->query("update db_ban set kode='$kode', ukuran='$ukuran', grup='$grup', alur_ban='$alur_ban', pattern='$pattern', brand='$brand', type='$type', harga='$harga' where id='$id'");
+    $result = $conn->query("update db_ban set kode='$kode', ukuran='$ukuran', grup='$grup', alur_ban='$alur_ban', pattern='$pattern', brand='$brand', type='$type', harga='$harga',li='$li',si='$si' where id='$id'");
 
     if ($result) {
         ?>

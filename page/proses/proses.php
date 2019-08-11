@@ -18,7 +18,7 @@ while ($row = mysqli_fetch_assoc($query)) {
 ?>
 </div>
 <div class="panel-body">
-    <a href="?page=klaim&aksi=tambah" class="btn btn-primary" style="margin-bottom: 15px"><i class="fa fa-plus"></i>Tambah Data</a>    
+    <a href="?page=klaim&aksi=tambah" class="btn btn-primary" style="margin-bottom: 15px"><i class="fa fa-plus"></i>Tambah Data</a>
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
             <thead>
@@ -50,7 +50,6 @@ while ($row = mysqli_fetch_assoc($query)) {
                             <?php
                             if ($v['status'] == 'Open') : ?>
                                 <a href="?page=klaim&aksi=edit&id_klaim=<?= $v['id_klaim'] ?>" class="btn btn-sm btn-success">Edit</a>
-                                <button onclick="doDelete('<?= $v['id_klaim'] ?>')" class="btn btn-sm btn-danger">Delete</button>
                                 <?php
                                 if ($_SESSION['akses'] == 'TS') : ?>
                                     <button onclick="doneProcess('<?= $v['id_klaim'] ?>')" class="btn btn-sm btn-warning">Done</button>
@@ -58,8 +57,9 @@ while ($row = mysqli_fetch_assoc($query)) {
                             <?php endif; ?>
                             <a href="?page=klaim&aksi=detail&id_klaim=<?= $v['id_klaim'] ?>&status=<?= $v['status'] ?>" class="btn btn-sm btn-info">Detail</a>
                             <?php if ($v['status'] == 'Done') : ?>
-                                <button onclick="downloadExcel('<?= $v['id_klaim'] ?>')" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Download</button>
-                            <?php endif ?>
+                                <button onclick="exportResult('<?= $v['id_klaim'] ?>')" class="btn btn-sm btn-success"><i class="fa fa-download"></i> Download</button>
+                                <?php endif ?>
+                                <button onclick="doDelete('<?= $v['id_klaim'] ?>')" class="btn btn-sm btn-danger">Delete</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -120,5 +120,9 @@ while ($row = mysqli_fetch_assoc($query)) {
                 }
             })
         }
+    }
+
+    function exportResult(id_klaim) {
+        window.open('function.php?type=export_result&id_klaim=' + id_klaim)
     }
 </script>

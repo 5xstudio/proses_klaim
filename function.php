@@ -22,6 +22,12 @@ if (isset($_GET['type'])) {
         case 'get_data_kerusakan':
             getDataKerusakan();
             break;
+        case 'download_template':
+            downloadTemplate();
+            break;
+        case 'export_result':
+            exportResult();
+            break;
     }
 }
 
@@ -157,11 +163,6 @@ function getDistributorId($kode)
     $row = mysqli_fetch_assoc($q);
     if ($row != NULL) {
         return $row['id_distributor'];
-    } else {
-        echo "<script>
-            alert('Logout Berhasil!');
-            location.replace('index.php?page=klaim&aksi=import');        
-        </script>";
     }
 }
 
@@ -188,7 +189,7 @@ function insertHeader($arr = [])
     return $conn->insert_id;
 }
 
-function insertDetail($arr = [])
+function insertDetail($arr = [], $header = [])
 {
     global $conn;
     $column = implode('`,`', array_keys($arr[0]));
@@ -202,21 +203,57 @@ function insertDetail($arr = [])
     if ($q) {
         echo "<script>
             alert('Data berhasil diimport!');
-            location.replace('index.php?page=klaim&aksi=import');        
+            location.replace('index.php?page=klaim&aksi=detail&id_klaim={$header['id_klaim']}&status=Open');        
         </script>";
     } else {
         echo "<script>
             alert('Terjadi kesalahan!');
-            location.replace('index.php?page=klaim&aksi=import');        
+            location.replace('index.php?page=klaim&aksi=detail&id_klaim={$header['id_klaim']}&status=Open');        
         </script>";
     }
+}
+
+function downloadTemplate()
+{
+    global $conn;
+    $sql = "SELECT h.*,d.kode_distributor FROM db_klaim h join db_distributor d on h.id_distributor = d.id_distributor where h.id_klaim = '{$_GET['id_klaim']}'";
+    $q = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($q);
+
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="template_klaim.xls"');
+    header('Cache-Control: max-age=0');
+
+    ?>
+    <table>
+        <tr>
+            <td>Kode Distributor</td>
+            <td><?= $row['kode_distributor'] ?></td>
+        </tr>
+        <tr>
+            <td>No Klaim</td>
+            <td><?= $row['no_klaim'] ?></td>
+        </tr>
+    </table>
+    <br>
+    <table border="1">
+        <tr>
+            <td>No</td>
+            <td>Kode Toko</td>
+            <td>Kode SKU</td>
+            <td>Kode Kerusakan</td>
+            <td>Sisa Alur</td>
+            <td>Keterangan</td>
+        </tr>
+    </table>
+<?php
+
 }
 
 function uploadExcel()
 {
     $inputFileName = $_FILES['file']['tmp_name'];
-    $reader = new Xls();
-    $spreadsheet = $reader->load($inputFileName);
+    $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($inputFileName);
 
     $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
     $data = [];
@@ -224,58 +261,145 @@ function uploadExcel()
 
     $header = [];
 
-    // print_r($sheetData);
-    // die;
     $keys = ['no', 'ukuran_ban', 'pattern', 'li', 'si', 'tipe', 'merk', 'no_serial1', 'no_serial2', 'new', 'cl', 'kerusakan', 'keterangan', 'sku'];
     foreach ($sheetData as $key => $row) {
-        if ($no == 2) {
-            $temp = array_slice($row, 0, 15);
-            $header['id_distributor'] = getDistributorId($row['C']);
-            $header['tgl_klaim'] = date('Y-m-d', strtotime($row['L']));
+
+        if ($no == 0) {
+            $header['id_distributor'] = getDistributorId($row['B']);
+        }
+
+        if ($no == 1) {
+            $header['id_klaim'] = getIdByCode('db_klaim', 'no_klaim', 'id_klaim', $row['B']);
         }
 
 
+        if ($no >= 4) {
 
-        if ($no == 3) {
-            $header['keterangan'] = $row['C'];
-            $header['grup'] = $row['L'];
-            $header['no_klaim'] = createNo();
-        }
-        if ($no >= 8) {
-            $temp = array_values(array_slice($row, 0, 16));
-            unset($temp[12]);
-            unset($temp[14]);
-            $arr = array_values($temp);
-            $newTemp = [];
-            $dt = [];
-            $idx = 0;
-            foreach ($arr as $key => $value) {
-                $newTemp[$keys[$idx]] = $value;
-                $idx++;
-            }
-            if ($newTemp['sku'] != '') {
-                $id_ban = selectBanBySku($newTemp['sku']);
-                if ($id_ban != NULL) {
-                    $dt['id_ban'] = $id_ban;
-                    $dt['sisa_alur'] = $newTemp['cl'] != NULL ? $newTemp['cl'] : 0;
-                    $dt['keterangan'] = $newTemp['keterangan'];
-                    $dt['kerusakan'] = $newTemp['kerusakan'];
-                    $dt['status'] = 'Pending';
-                    $data[] = $dt;
-                }
-            }
+            $dt['id_klaim'] = $header['id_klaim'];
+            $dt['id_toko'] = getIdByCode('db_toko', 'kode_toko', 'id_toko', $row['B']);
+            $dt['id_ban'] = getIdByCode('db_ban', 'kode', 'id', $row['C']);
+            $dt['id_kerusakan'] = getIdByCode('db_kerusakan', 'kode_kerusakan', 'id_kerusakan', $row['D']);
+            $dt['sisa_alur'] = $row['E'];
+            $dt['keterangan'] = $row['F'];
+            $data[] = $dt;
         }
         $no++;
     }
-    // print_r($data);
-    $id_klaim = insertHeader($header);
-    // $id_klaim = 7;
+
     $detail = [];
     foreach ($data as $key => $value) {
-        $value['id_klaim'] = $id_klaim;
+        $value['id_klaim'] = $dt['id_klaim'];
         $detail[] = $value;
     }
-    insertDetail($detail);
+    // var_dump($detail);
+    insertDetail($detail, $header);
+}
+
+function getIdByCode($table, $kode_kolom, $id_kolom, $value)
+{
+    global $conn;
+    $sql = "SELECT $id_kolom FROM {$table} where {$kode_kolom} ='$value' ";
+    $q = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($q);
+    if ($row != NULL) {
+        return $row[$id_kolom];
+    } else {
+        return NULL;
+    }
+}
+
+function exportResult()
+{
+    global $conn;
+    $sqlh = " SELECT k.*,d.nama_distributor,d.alamat FROM db_klaim k
+    JOIN db_distributor d on k.id_distributor = d.id_distributor
+    WHERE k.id_klaim='{$_GET['id_klaim']}'";
+    $query = mysqli_query($conn, $sqlh);
+    $header = mysqli_fetch_assoc($query);
+
+    $klaim = [];
+    $sql = " SELECT d.*,h.no_klaim,b.kode,b.ukuran,b.grup,b.alur_ban,b.pattern,b.li,b.si,b.type,b.brand,k.kode_kerusakan,k.nama_kerusakan,k.sebab,k.disposisi,t.kode_toko,t.nama_toko,h.status 
+    FROM db_klaim_detail d
+    JOIN db_klaim h ON d.id_klaim = h.id_klaim
+    JOIN db_ban b ON d.id_ban = b.id
+    JOIN db_kerusakan k ON d.id_kerusakan = k.id_kerusakan
+    JOIN db_toko t ON d.id_toko = t.id_toko
+    WHERE h.id_klaim = '{$_GET['id_klaim']}' ";
+    $query = mysqli_query($conn, $sql);
+    $no = 1;
+    while ($row = mysqli_fetch_assoc($query)) {
+        $row['no'] = $no;
+        $klaim[] = $row;
+        $no++;
+    }
+    $b = 'border:1px solid black;';
+    $c = 'text-align:center;';
+    $l = 'text-align:left;';
+    $r = 'text-align:right;';
+
+    header('Content-Type: application/vnd.ms-excel');
+    header('Content-Disposition: attachment;filename="summary_klaim.xls"');
+    header('Cache-Control: max-age=0');
+    ?>
+    <table border="0" cellspacing="0" cellpadding="4">
+        <tr>
+            <td colspan="12" style="text-align:center;">TYRE CLAIM SHEET</td>
+            <td rowspan="3" style="<?= $b ?>"></td>
+            <td rowspan="3" style="<?= $b ?>"></td>
+            <td rowspan="3" style="<?= $b ?>"></td>
+        </tr>
+        <tr>
+            <td colspan="2">Distributor</td>
+            <td colspan="5">: <?=$header['nama_distributor']?></td>
+            <td colspan="4">Date of Claim / Tanggal</td>
+            <td>: <?=date('d F Y', strtotime($header['tgl_klaim']))?></td>
+        </tr>
+        <tr>
+            <td colspan="2">Address / Alamat</td>
+            <td colspan="5">: <?=$header['alamat']?></td>
+            <td colspan="4">Page</td>
+            <td>: 1</td>
+        </tr>
+        <tr>
+            <td colspan="12"></td>
+            <td style="<?= $b ?>">Dibuat:</td>
+            <td style="<?= $b ?>">Diperiksa</td>
+            <td style="<?= $b ?>">Disetujui</td>
+        </tr>
+        <tr>
+            <td style="<?= $b.$c ?>">1. No</td>
+            <td style="<?= $b.$c ?>">2. Ukuran Ban</td>
+            <td style="<?= $b.$c ?>">3.Patern</td>
+            <td style="<?= $b.$c ?>">4. LI</td>
+            <td style="<?= $b.$c ?>">5. SI</td>
+            <td style="<?= $b.$c ?>">6. Tipe</td>
+            <td style="<?= $b.$c ?>">7. Merk</td>
+            <td colspan="2" style="<?= $b.$c ?>">8. No Serial</td>
+            <td colspan="2" style="<?= $b.$c ?>">9. Sisa Alur (mm) </td>
+            <td style="<?= $b.$c ?>">10. Kerusakan</td>
+            <td colspan="3" style="<?= $b.$c ?>">11. Keterangan</td>
+        </tr>
+        <?php
+        foreach ($klaim as $key => $value) : ?>
+            <tr>
+                <td style="<?= $b.$c ?>"><?= $value['no'] ?></td>
+                <td style="<?= $b ?>"><?= $value['ukuran'] ?></td>
+                <td style="<?= $b ?>"><?= $value['pattern'] ?></td>
+                <td style="<?= $b ?>"><?= $value['li'] ?></td>
+                <td style="<?= $b ?>"><?= $value['si'] ?></td>
+                <td style="<?= $b ?>"><?= $value['type'] ?></td>
+                <td style="<?= $b ?>"><?= $value['brand'] ?></td>
+                <td style="<?= $b ?>"><?= $value[''] ?></td>
+                <td style="<?= $b ?>"><?= $value[''] ?></td>
+                <td style="<?= $b.$c ?>"><?= $value['sisa_alur'] == $value['alur_ban'] ? '&#10004;' : '' ?></td>
+                <td style="<?= $b.$r ?>"><?= $value['sisa_alur'] == $value['alur_ban'] ? '' : $value['sisa_alur'] ?></td>
+                <td style="<?= $b ?>"><?= $value['nama_kerusakan'] ?></td>
+                <td colspan="3" style="<?= $b ?>"><?= $value['keterangan'] ?></td>
+            </tr>
+        <?php endforeach ?>
+    </table>
+<?php
+
 }
 
 function exportSummary()

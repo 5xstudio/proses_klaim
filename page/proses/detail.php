@@ -20,8 +20,8 @@ while ($row = mysqli_fetch_assoc($query)) {
 </div>
 <div class="panel-body">
     <a href="?page=klaim&aksi=tambah_detail&id_klaim=<?= $_GET['id_klaim'] ?>" class="btn btn-primary" style="margin-bottom: 15px" <?=$_GET['status'] == 'Done' ? 'disabled' : '' ?> ><i class="fa fa-plus"></i>Tambah Data</a>
-    <a href="?page=klaim&aksi=import" class="btn btn-primary" style="margin-bottom: 15px" <?=$_GET['status'] == 'Done' ? 'disabled' : '' ?>><i class="fa fa-file-excel-o"></i> Import Excel</a>
-    <a href="tcs.xls" class="btn btn-success" style="margin-bottom: 15px;margin-right:1rem;" <?=$_GET['status'] == 'Done' ? 'disabled' : '' ?>><i class="fa fa-download"></i> Download Template</a>
+    <a href="?page=klaim&aksi=import&id_klaim=<?=$_GET['id_klaim']?>&status=<?=$_GET['status']?>" class="btn btn-primary" style="margin-bottom: 15px" <?=$_GET['status'] == 'Done' ? 'disabled' : '' ?>><i class="fa fa-file-excel-o"></i> Import Excel</a>
+    <button onclick="downloadTemplate()" class="btn btn-success" style="margin-bottom: 15px;margin-right:1rem;" <?=$_GET['status'] == 'Done' ? 'disabled' : '' ?>><i class="fa fa-download"></i> Download Template</button>
     <a href="?page=klaim" class="btn btn-primary pull-right" style="margin-bottom: 15px"><i class="fa fa-arrow-left"></i> Back</a>
     <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -146,6 +146,10 @@ while ($row = mysqli_fetch_assoc($query)) {
                 alert('Terjadi Kesalahan')
             }
         })
+    }
+
+    function downloadTemplate(){
+        window.open('function.php?type=download_template&id_klaim=<?=$_GET['id_klaim']?>');
     }
 
     function doDelete(id_klaim_detail) {

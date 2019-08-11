@@ -27,10 +27,10 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
 
 
                 <li>
-                    <a href="index.php"><i class="fa fa-dashboard fa-3x"></i> Monitoring Klaim</a>
+                    <a href="index.php"><i class="fa fa-dashboard"></i> Monitoring Klaim</a>
                 </li>
                 <li>
-                    <a href="?page=klaim"><i class="fa fa-flask fa-3x"></i> Proses Klaim</a>
+                    <a href="?page=klaim"><i class="fa fa-flask"></i> Proses Klaim</a>
                 </li>
 
                 <li <?php if ($page == "ban" || $page == "kerusakan" || $page == "distributor" || $page == "toko" || $page == "karyawan") {
@@ -39,7 +39,7 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
                     }
                     ?>>
 
-                    <a href="#"><i class="fa fa-sitemap fa-3x"></i> Data Master<span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-sitemap"></i> Data Master</a>
 
                     <ul class="nav nav-second-level">
 
@@ -62,7 +62,7 @@ font-size: 16px;">&nbsp; <a href="function.php?type=logout" class="btn btn-dange
             </ul>
 
             <li>
-                <a href="#"><i class="fa fa-laptop fa-3x"></i> Pengaturan </a>
+                <a href="#"><i class="fa fa-laptop"></i> Pengaturan </a>
                 <ul class="nav nav-second-level">
 
                     <li>

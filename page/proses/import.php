@@ -1,6 +1,8 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         Import Data Klaim
+        <!-- ?page=klaim&aksi=detail&id_klaim=9&status=Open -->
+        <a href="?page=klaim&aksi=detail&id_klaim=<?=$_GET['id_klaim']?>&status=<?=$_GET['status']?>" class="btn btn-primary pull-right" style="margin-bottom: 15px"><i class="fa fa-arrow-left"></i> Back</a>
     </div>
     <div class="panel-body">
         <div class="row">

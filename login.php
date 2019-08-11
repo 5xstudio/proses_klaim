@@ -2,8 +2,7 @@
     <div class="row text-center ">
         <div class="col-md-12">
             <br /><br />
-            <h2> Silahkan Login</h2>
-            <br />
+            <img style="width:12rem;height:auto;margin-bottom:2rem;" src="./logomasa.png" >
         </div>
     </div>
     <div class="row ">

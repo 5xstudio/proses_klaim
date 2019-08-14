@@ -184,9 +184,8 @@ if (isset($_POST['simpan'])) {
     //     die;
     if ($_POST['aksi'] == 'tambah_detail') {
         // tambah
-        echo $sql = "INSERT into db_klaim_detail (id_ban, id_klaim, id_toko, id_kerusakan, sisa_alur) 
+        $sql = "INSERT into db_klaim_detail (id_ban, id_klaim, id_toko, id_kerusakan, sisa_alur) 
         values('$id_ban', '$id_klaim', '$id_toko', '$id_kerusakan', '$sisa_alur')";
-        die;
         $result = $conn->query($sql);
     } else {
         // edit

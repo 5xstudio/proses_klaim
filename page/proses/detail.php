@@ -1,7 +1,7 @@
 <?php
 $klaim = [];
 // $sql = " SELECT d.*,b.ukuran from db_klaim_detail d join db_ban b on d.id_ban = b.id where d.id_klaim = '" . $_GET['id_klaim'] . "' ";
-$sql = " SELECT d.*,h.no_klaim,b.kode,b.ukuran,b.grup,b.alur_ban,k.kode_kerusakan,k.nama_kerusakan,k.sebab,k.disposisi,t.kode_toko,t.nama_toko,h.status 
+$sql = " SELECT d.*,h.no_klaim,b.kode,b.ukuran,b.grup,b.alur_ban,k.kode_kerusakan,k.keterangan as ket,k.nama_kerusakan,k.sebab,k.disposisi,t.kode_toko,t.nama_toko,h.status 
 FROM db_klaim_detail d
 JOIN db_klaim h ON d.id_klaim = h.id_klaim
 JOIN db_ban b ON d.id_ban = b.id
@@ -54,7 +54,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                         <td><?= $v['sebab'] ?></td>
                         <td><?= $v['disposisi'] ?></td>
                         <td><?= $v['nama_toko'] ?></td>
-                        <td><?= $v['keterangan'] ?></td>
+                        <td><?= $v['ket'] ?></td>
                         <td><?php
                             if ($v['status'] == 'Open') : ?>
                                 <a href="?page=klaim&aksi=edit_detail&id_klaim=<?= $_GET['id_klaim'] ?>&id_klaim_detail=<?= $v['id_klaim_detail'] ?>" class="btn btn-sm btn-success">Edit</a>

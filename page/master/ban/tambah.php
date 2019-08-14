@@ -57,11 +57,11 @@
 
                     <div class="form-group">
                         <label>Li</label>
-                        <input class="form-control" name="li" value="<?php echo $tampil['li']; ?>" />
+                        <input class="form-control" name="serial_l" value="<?php echo $tampil['serial_l']; ?>" />
                     </div>
                     <div class="form-group">
                         <label>Si</label>
-                        <input class="form-control" name="si" value="<?php echo $tampil['si']; ?>" />
+                        <input class="form-control" name="serial_r" value="<?php echo $tampil['serial_r']; ?>" />
                     </div>
 
                     <div>
@@ -83,13 +83,13 @@ $pattern = $_POST['pattern'];
 $brand = $_POST['brand'];
 $type = $_POST['type'];
 $harga = $_POST['harga'];
-$li = $_POST['li'];
-$si = $_POST['si'];
+$serial_l = $_POST['serial_l'];
+$serial_r = $_POST['serial_r'];
 
 $simpan = $_POST['simpan'];
 
 if ($simpan) {
-    $result = $conn->query("insert into db_ban (kode, ukuran, grup, alur_ban, pattern, brand, type, harga,li,si) values('$kode', '$ukuran', '$grup', '$alur_ban', '$pattern', '$brand', '$type', '$harga','$li','$si')");
+    $result = $conn->query("insert into db_ban (kode, ukuran, grup, alur_ban, pattern, brand, type, harga,serial_l,serial_r) values('$kode', '$ukuran', '$grup', '$alur_ban', '$pattern', '$brand', '$type', '$harga','$serial_l','$serial_r')");
 
     if ($result) {
         ?>

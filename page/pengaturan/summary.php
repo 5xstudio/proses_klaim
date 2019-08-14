@@ -70,7 +70,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                             <td class=""><?= $v['ukuran'] ?></td>
                             <td class=""><?= $v['brand'] ?></td>
                             <td class=""><?= $v['pattern'] ?></td>
-                            <td class=""><?= $v['li'] . ' - ' . $v['si'] ?></td>
+                            <td class=""><?= $v['serial_l'] . ' - ' . $v['serial_r'] ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

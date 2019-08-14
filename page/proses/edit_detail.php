@@ -171,7 +171,7 @@ $no_klaim = $header['no_klaim'];
 
 // POST save
 if (isset($_POST['simpan'])) {
-    var_dump($_POST);
+    // var_dump($_POST);
     // die;
     $id_ban = $_POST['id_ban'];
     $sisa_alur = $_POST['sisa_alur'];

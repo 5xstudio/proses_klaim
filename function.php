@@ -385,12 +385,12 @@ function exportResult()
                 <td style="<?= $b.$c ?>"><?= $value['no'] ?></td>
                 <td style="<?= $b ?>"><?= $value['ukuran'] ?></td>
                 <td style="<?= $b ?>"><?= $value['pattern'] ?></td>
-                <td style="<?= $b ?>"><?= $value['li'] ?></td>
-                <td style="<?= $b ?>"><?= $value['si'] ?></td>
+                <td style="<?= $b ?>"><?= '' ?></td>
+                <td style="<?= $b ?>"><?= '' ?></td>
                 <td style="<?= $b ?>"><?= $value['type'] ?></td>
                 <td style="<?= $b ?>"><?= $value['brand'] ?></td>
-                <td style="<?= $b ?>"><?= $value[''] ?></td>
-                <td style="<?= $b ?>"><?= $value[''] ?></td>
+                <td style="<?= $b ?>"><?= $value['serial_l'] ?></td>
+                <td style="<?= $b ?>"><?= $value['serial_r'] ?></td>
                 <td style="<?= $b.$c ?>"><?= $value['sisa_alur'] == $value['alur_ban'] ? '&#10004;' : '' ?></td>
                 <td style="<?= $b.$r ?>"><?= $value['sisa_alur'] == $value['alur_ban'] ? '' : $value['sisa_alur'] ?></td>
                 <td style="<?= $b ?>"><?= $value['nama_kerusakan'] ?></td>

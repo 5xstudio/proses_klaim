@@ -8,8 +8,8 @@ $tampil = $result->fetch_assoc();
 
 $lokasi = $tampil['brand'];
 $type = $tampil['type'];
-$li = $tampil['li'];
-$si = $tampil['si'];
+$serial_l = $tampil['serial_l'];
+$serial_r = $tampil['serial_r'];
 
 ?>
 
@@ -83,11 +83,11 @@ $si = $tampil['si'];
                     </div>
                     <div class="form-group">
                         <label>Li</label>
-                        <input class="form-control" name="li" value="<?php echo $tampil['li']; ?>" />
+                        <input class="form-control" name="serial_l" value="<?php echo $tampil['serial_l']; ?>" />
                     </div>
                     <div class="form-group">
                         <label>Si</label>
-                        <input class="form-control" name="si" value="<?php echo $tampil['si']; ?>" />
+                        <input class="form-control" name="serial_r" value="<?php echo $tampil['serial_r']; ?>" />
                     </div>
 
                     <div>
@@ -107,15 +107,15 @@ $grup = $_POST['grup'];
 $alur_ban = $_POST['alur_ban'];
 $pattern = $_POST['pattern'];
 $brand = $_POST['brand'];
-$li = $_POST['li'];
-$si = $_POST['si'];
+$serial_l = $_POST['serial_l'];
+$serial_r = $_POST['serial_r'];
 $type = $_POST['type'];
 $harga = $_POST['harga'];
 
 $simpan = $_POST['simpan'];
 
 if ($simpan) {
-    $result = $conn->query("update db_ban set kode='$kode', ukuran='$ukuran', grup='$grup', alur_ban='$alur_ban', pattern='$pattern', brand='$brand', type='$type', harga='$harga',li='$li',si='$si' where id='$id'");
+    $result = $conn->query("update db_ban set kode='$kode', ukuran='$ukuran', grup='$grup', alur_ban='$alur_ban', pattern='$pattern', brand='$brand', type='$type', harga='$harga',serial_l='$serial_l',serial_r='$serial_r' where id='$id'");
 
     if ($result) {
         ?>

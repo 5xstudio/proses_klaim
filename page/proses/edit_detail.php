@@ -2,7 +2,6 @@
 
 // GET
 $sisa_alur = '';
-$keterangan = '';
 $id_kerusakan = '';
 $id_ban = '';
 $id_toko = '';
@@ -26,7 +25,6 @@ if ($aksi == 'edit_detail') {
     $id_toko = $row['id_toko'];
     $disposisi = $row['disposisi'];
     $sebab = $row['sebab'];
-    $keterangan = $row['keterangan'];
     $id_kerusakan = $row['id_kerusakan'];
     $id_ban = $row['id_ban'];
     $percent = round($sisa_alur / $alur_ban * 100,2);
@@ -118,10 +116,6 @@ $no_klaim = $header['no_klaim'];
                             </div>
                         </div>
                     </fieldset>
-                    <div class="form-group">
-                        <label>Keterangan</label>
-                        <textarea class="form-control" rows="5" name="keterangan"><?= $keterangan ?></textarea>
-                    </div>
                     <input type="hidden" name="aksi" value="<?= $aksi ?>" />
                     <input type="hidden" name="id_klaim" value="<?= $_GET['id_klaim'] ?>" />
                     <div>
@@ -177,24 +171,26 @@ $no_klaim = $header['no_klaim'];
 
 // POST save
 if (isset($_POST['simpan'])) {
+    var_dump($_POST);
+    // die;
     $id_ban = $_POST['id_ban'];
     $sisa_alur = $_POST['sisa_alur'];
     $id_klaim_detail = $_GET['id_klaim_detail'];
     $id_kerusakan = $_POST['id_kerusakan'];
     $id_klaim =  $_POST['id_klaim'];
     $id_toko = $_POST['id_toko'];
-    $keterangan = $_POST['keterangan'];
     // $sql = "INSERT into db_klaim_detail (id_ban, id_klaim, id_toko, id_kerusakan, keterangan, sisa_alur) 
     //     values('$id_ban', '$id_klaim', '$id_toko', '$id_kerusakan', '$keterangan', '$sisa_alur')";
     //     die;
     if ($_POST['aksi'] == 'tambah_detail') {
         // tambah
-        $sql = "INSERT into db_klaim_detail (id_ban, id_klaim, id_toko, id_kerusakan, keterangan, sisa_alur) 
-        values('$id_ban', '$id_klaim', '$id_toko', '$id_kerusakan', '$keterangan', '$sisa_alur')";
+        echo $sql = "INSERT into db_klaim_detail (id_ban, id_klaim, id_toko, id_kerusakan, sisa_alur) 
+        values('$id_ban', '$id_klaim', '$id_toko', '$id_kerusakan', '$sisa_alur')";
+        die;
         $result = $conn->query($sql);
     } else {
         // edit
-        $sql = "UPDATE db_klaim_detail set id_ban='$id_ban', id_klaim='{$id_klaim}', keterangan='$keterangan', id_kerusakan='$id_kerusakan',sisa_alur='$sisa_alur' where id_klaim_detail='{$id_klaim_detail}' ";
+        $sql = "UPDATE db_klaim_detail set id_ban='$id_ban', id_klaim='{$id_klaim}', id_kerusakan='$id_kerusakan',sisa_alur='$sisa_alur' where id_klaim_detail='{$id_klaim_detail}' ";
         $result = $conn->query($sql);
     }
 

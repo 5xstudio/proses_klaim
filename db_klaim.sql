@@ -184,9 +184,17 @@ CREATE TABLE `db_klaim_detail` (
   `id_ban` int(11) DEFAULT NULL,
   `id_toko` int(11) DEFAULT NULL,
   `keterangan` text,
-  `id_kerusakan` text,
+  `id_kerusakan` int(11) DEFAULT NULL,
   `sisa_alur` decimal(8,1) DEFAULT NULL,
-  PRIMARY KEY (`id_klaim_detail`)
+  PRIMARY KEY (`id_klaim_detail`),
+  KEY `FK_db_klaim_detail_db_klaim` (`id_klaim`),
+  KEY `FK_db_klaim_detail_db_ban` (`id_ban`),
+  KEY `FK_db_klaim_detail_db_toko` (`id_toko`),
+  KEY `FK_db_klaim_detail_db_kerusakan` (`id_kerusakan`),
+  CONSTRAINT `FK_db_klaim_detail_db_ban` FOREIGN KEY (`id_ban`) REFERENCES `db_ban` (`id`),
+  CONSTRAINT `FK_db_klaim_detail_db_kerusakan` FOREIGN KEY (`id_kerusakan`) REFERENCES `db_kerusakan` (`id_kerusakan`),
+  CONSTRAINT `FK_db_klaim_detail_db_klaim` FOREIGN KEY (`id_klaim`) REFERENCES `db_klaim` (`id_klaim`),
+  CONSTRAINT `FK_db_klaim_detail_db_toko` FOREIGN KEY (`id_toko`) REFERENCES `db_toko` (`id_toko`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -196,7 +204,7 @@ CREATE TABLE `db_klaim_detail` (
 
 LOCK TABLES `db_klaim_detail` WRITE;
 /*!40000 ALTER TABLE `db_klaim_detail` DISABLE KEYS */;
-INSERT INTO `db_klaim_detail` VALUES (1,8,15,1,'xsss','15',2.1),(9,8,4,1,'ss','12',4.0),(10,9,1,1,'kuda','5',4.3),(11,9,1,1,'kuda','5',2.0),(12,9,1,1,'kuda','5',2.0);
+INSERT INTO `db_klaim_detail` VALUES (1,8,15,1,'xsss',15,2.1),(9,8,4,1,'ss',12,4.0),(10,9,1,1,'kuda',5,4.3),(11,9,1,1,'kuda',5,2.0),(12,9,1,1,'kuda',5,2.0);
 /*!40000 ALTER TABLE `db_klaim_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-15  6:07:57
+-- Dump completed on 2019-08-20  5:27:11

@@ -1,0 +1,138 @@
+
+
+Wed Aug 14 15:56:25 2019
+Command line: TestDisk
+
+TestDisk 7.0, Data Recovery Utility, April 2015
+Christophe GRENIER <grenier@cgsecurity.org>
+http://www.cgsecurity.org
+OS: Linux, kernel 5.0.0-23-generic (#24~18.04.1-Ubuntu SMP Mon Jul 29 16:12:28 UTC 2019) x86_64
+Compiler: GCC 7.2
+ext2fs lib: 1.44.1, ntfs lib: libntfs-3g, reiserfs lib: none, ewf lib: none, curses lib: ncurses 6.0
+/dev/sda: LBA, HPA, LBA48, DCO support
+/dev/sda: size       1953525168 sectors
+/dev/sda: user_max   1953525168 sectors
+/dev/sda: native_max 1953525168 sectors
+Warning: can't get size for Disk /dev/mapper/control - 0 B - 0 sectors, sector size=512
+Hard disk list
+Disk /dev/sda - 1000 GB / 931 GiB - CHS 121601 255 63, sector size=512 - WDC WD1003FZEX-00MK2A0, S/N:WD-WCC3F4920388, FW:01.01A01
+
+Partition table type (auto): EFI GPT
+Disk /dev/sda - 1000 GB / 931 GiB - WDC WD1003FZEX-00MK2A0
+Partition table type: EFI GPT
+
+Analyse Disk /dev/sda - 1000 GB / 931 GiB - CHS 121601 255 63
+hdr_size=92
+hdr_lba_self=1
+hdr_lba_alt=1953525167 (expected 1953525167)
+hdr_lba_start=34
+hdr_lba_end=1953525134
+hdr_lba_table=2
+hdr_entries=128
+hdr_entsz=128
+check_part_gpt failed for partition
+ 2 P MS Reserved               206848     468991     262144 [Microsoft reserved partition]
+Current partition structure:
+ 1 P EFI System                  2048     206847     204800 [EFI system partition]
+No FAT, NTFS, ext2, JFS, Reiser, cramfs or XFS marker
+ 2 P MS Reserved               206848     468991     262144 [Microsoft reserved partition]
+ 2 P MS Reserved               206848     468991     262144 [Microsoft reserved partition]
+ 3 P MS Data                   468992 1134325759 1133856768 [Basic data partition]
+ 4 P Unknown               1134325760 1937899519  803573760
+ 5 P Linux Swap            1937899520 1953523711   15624192
+ntfs_mst_post_read_fixup_warn: magic: 0x00000000  size: 1024   usa_ofs: 0  usa_count: 0: Invalid argument
+Record 0 has no FILE magic (0x0)
+Failed to load $MFT: Input/output error
+ntfs_mst_post_read_fixup_warn: magic: 0x00000000  size: 1024   usa_ofs: 0  usa_count: 0: Invalid argument
+Record 0 has no FILE magic (0x0)
+Failed to load $MFT: Input/output error
+
+search_part()
+Disk /dev/sda - 1000 GB / 931 GiB - CHS 121601 255 63
+NTFS at 0/1/1
+filesystem size           204796557
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               12799784
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS part_offset=32256, part_size=104855837184, sector_size=512
+NTFS partition cannot be added (part_offset<part_size).
+NTFS at 0/1/1
+filesystem size           204796557
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               12799784
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data                       63  204796619  204796557
+     NTFS, blocksize=4096, 104 GB / 97 GiB
+NTFS at 12748/1/1
+filesystem size           1748707317
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               109294207
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS part_offset=104855901696, part_size=895338146304, sector_size=512
+NTFS partition cannot be added (part_offset<part_size).
+NTFS at 12748/1/1
+filesystem size           1748707317
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               109294207
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data                204796683 1953503999 1748707317
+     NTFS, blocksize=4096, 895 GB / 833 GiB
+NTFS at 121601/57/56
+filesystem size           819197952
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data               1134325760 1953523711  819197952
+     NTFS found using backup sector, blocksize=4096, 419 GB / 390 GiB
+NTFS at 121601/57/56
+filesystem size           819197952
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS: Can't read MFT
+     MS Data               1953523711 2772721662  819197952
+     NTFS, blocksize=4096, 419 GB / 390 GiB
+This partition ends after the disk limits. (start=1953523711, size=819197952, end=2772721662, disk end=1953525168)
+Disk /dev/sda - 1000 GB / 931 GiB - CHS 121601 255 63
+Check the harddisk size: HD jumpers settings, BIOS detection...
+The harddisk (1000 GB / 931 GiB) seems too small! (< 1419 GB / 1322 GiB)
+The following partition can't be recovered:
+     MS Data               1953523711 2772721662  819197952
+     NTFS, blocksize=4096, 419 GB / 390 GiB
+
+Results
+   P MS Data                       63  204796619  204796557
+     NTFS, blocksize=4096, 104 GB / 97 GiB
+     MS Data                204796683 1953503999 1748707317
+     NTFS, blocksize=4096, 895 GB / 833 GiB
+     MS Data               1134325760 1953523711  819197952
+     NTFS found using backup sector, blocksize=4096, 419 GB / 390 GiB
+
+Hint for advanced users. dmsetup may be used if you prefer to avoid to rewrite the partition table for the moment:
+echo "0 204796557 linear /dev/sda 63" | dmsetup create test0
+echo "0 1748707317 linear /dev/sda 204796683" | dmsetup create test1
+echo "0 819197952 linear /dev/sda 1134325760" | dmsetup create test2
+ntfs_device_testdisk_io_ioctl() unimplemented
+ntfs_device_testdisk_io_ioctl() unimplemented
+
+     MS Data               1134325760 1953523711  819197952
+     NTFS found using backup sector, blocksize=4096, 419 GB / 390 GiB
+Can't open filesystem. Filesystem seems damaged.
+
+interface_write()
+ 1 P MS Data                       63  204796619  204796557
+simulate write!
+
+TestDisk exited normally.

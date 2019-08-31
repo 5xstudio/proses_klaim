@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 
 session_start();
-$conn = mysqli_connect("localhost", "am8", "doraemon", "db_klaim");
+$conn = mysqli_connect("localhost", "root", "root", "db_klaim");
 // $conn = mysqli_connect("localhost", "root", "", "db_klaim");
 
 $page = $_GET['page'];

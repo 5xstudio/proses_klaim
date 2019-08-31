@@ -263,6 +263,8 @@ function uploadExcel()
     $header = [];
 
     $keys = ['no', 'ukuran_ban', 'pattern', 'li', 'si', 'tipe', 'merk', 'no_serial1', 'no_serial2', 'new', 'cl', 'kerusakan', 'keterangan', 'sku'];
+    // var_dump($sheetData);
+    // die;
     foreach ($sheetData as $key => $row) {
 
         if ($no == 0) {
@@ -289,9 +291,11 @@ function uploadExcel()
     $detail = [];
     foreach ($data as $key => $value) {
         $value['id_klaim'] = $dt['id_klaim'];
+        if($value['id_toko'] != NULL || $value['id_ban'] != NULL || $value['id_kerusakan'] != NULL || $value['sisa_alur'] != NULL)
         $detail[] = $value;
     }
-    
+    // var_dump($detail);
+    // die;
     insertDetail($detail, $header);
 }
 

@@ -1,6 +1,6 @@
 <?php
 $klaim = [];
-$sql = " SELECT d.*,b.*,h.no_klaim,h.tgl_klaim,dis.nama_distributor,t.* FROM db_klaim_detail d
+$sql = " SELECT d.*,b.*,h.no_klaim,h.status,h.tgl_klaim,dis.nama_distributor,t.* FROM db_klaim_detail d
 JOIN db_klaim h ON d.id_klaim = h.id_klaim
 JOIN db_distributor dis ON h.id_distributor = dis.id_distributor
 JOIN db_ban b ON d.id_ban = b.id
@@ -46,6 +46,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                         <th rowspan="2">Distributor</th>
                         <th rowspan="2">Tipe</th>
                         <th rowspan="2">Toko</th>
+                        <th rowspan="2">Status</th>
                         <th colspan="5">Tyre Profile</th>
                     </tr>
                     <tr>
@@ -66,6 +67,7 @@ while ($row = mysqli_fetch_assoc($query)) {
                             <td><?= $v['nama_distributor'] ?></td>
                             <td><?= $v['grup'] ?></td>
                             <td class=""><?= $v['nama_toko'] ?></td>
+                            <td><?= $v['status'] ?></td>
                             <td class=""><?= $v['kode'] ?></td>
                             <td class=""><?= $v['ukuran'] ?></td>
                             <td class=""><?= $v['brand'] ?></td>

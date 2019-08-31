@@ -18,8 +18,7 @@ require_once 'config.php';
     <!-- GOOGLE FONTS-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
-    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-    <script src="assets/js/jquery-3.4.1.min.js"></script>
+    <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />    
 </head>
 
 <body>
@@ -33,7 +32,7 @@ require_once 'config.php';
 
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
-    <!-- <script src="assets/js/jquery-1.10.2.js"></script> -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
     
 
     <!-- BOOTSTRAP SCRIPTS -->
@@ -47,7 +46,7 @@ require_once 'config.php';
     <script src="assets/js/morris/morris.js"></script>
     <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
     <script src="assets/js/function.js"></script>
-    <!-- <script src="assets/js/custom.js"></script> -->
+    <script src="assets/js/custom.js"></script>
     <script>
         $(document).ready(function() {
             $('#dataTables-example').dataTable();

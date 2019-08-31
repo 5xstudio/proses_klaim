@@ -199,6 +199,7 @@ function insertDetail($arr = [], $header = [])
     }
     $values = substr($values, 0, (strlen($values) - 1));
     $sql = "INSERT into db_klaim_detail (`$column`) values $values ";
+    
     $q = mysqli_query($conn, $sql);
     if ($q) {
         echo "<script>
@@ -274,7 +275,6 @@ function uploadExcel()
 
 
         if ($no >= 4) {
-
             $dt['id_klaim'] = $header['id_klaim'];
             $dt['id_toko'] = getIdByCode('db_toko', 'kode_toko', 'id_toko', $row['B']);
             $dt['id_ban'] = getIdByCode('db_ban', 'kode', 'id', $row['C']);
@@ -291,7 +291,7 @@ function uploadExcel()
         $value['id_klaim'] = $dt['id_klaim'];
         $detail[] = $value;
     }
-    // var_dump($detail);
+    
     insertDetail($detail, $header);
 }
 

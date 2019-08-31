@@ -19,6 +19,9 @@ require_once 'config.php';
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />    
+
+    <!-- JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
 </head>
 
 <body>
@@ -31,9 +34,6 @@ require_once 'config.php';
     ?>
 
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
-    <!-- JQUERY SCRIPTS -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
-    
 
     <!-- BOOTSTRAP SCRIPTS -->
     <script src="assets/js/bootstrap.min.js"></script>
